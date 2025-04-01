@@ -121,16 +121,16 @@ export default function MacOSDesktop() {
          }}>
       {/* 顶部状态栏 */}
       <div className="fixed top-0 left-0 right-0 h-7 bg-[#f8f8f8] border-b border-gray-200 z-50 flex items-center justify-between px-4 text-gray-700">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-[14px]">
           <span className="text-lg">🖥️</span>
-          <span className="font-semibold">团建游戏系统</span>
+          <span>团建游戏系统</span>
           <span>文件</span>
           <span>编辑</span>
           <span>查看</span>
           <span>窗口</span>
           <span>帮助</span>
         </div>
-        <div className="flex items-center gap-4 text-sm">
+        <div className="flex items-center gap-4 text-[14px]">
           <span>🔋 100%</span>
           <span>📶 Wi-Fi</span>
           <span>{currentTime}</span>
