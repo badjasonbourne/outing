@@ -85,10 +85,10 @@ export default function DrawGuessGame() {
       >
         <div className="space-y-3 text-gray-600">
           <p className="text-sm">1. 将参与者分成若干小组，每组至少3人</p>
-          <p className="text-sm">2. 每轮选择一名"画手"，其他队员作为"猜测者"</p>
-          <p className="text-sm">3. "画手"查看词语，用画图方式表达，<span className="font-medium">不能说话或做手势</span></p>
-          <p className="text-sm">4. "猜测者"根据画面猜测词语，限时60秒</p>
-          <p className="text-sm">5. 每轮结束后更换"画手"</p>
+          <p className="text-sm">2. 每轮选择一名&quot画手&quot，其他队员作为&quot猜测者&quot</p>
+          <p className="text-sm">3. &quot画手&quot查看词语，用画图方式表达，<span className="font-medium">不能说话或做手势</span></p>
+          <p className="text-sm">4. &quot猜测者&quot根据画面猜测词语，限时60秒</p>
+          <p className="text-sm">5. 每轮结束后更换&quot画手&quot</p>
           <p className="text-sm">6. 猜对词语最多的小组获胜</p>
         </div>
       </RulesModal>
@@ -194,3 +194,10 @@ export default function DrawGuessGame() {
     </div>
   );
 } 
+
+// 将所有未转义的双引号 " 替换为 &quot;
+// 例如:
+// 从: <p>这是"引号"示例</p>
+// 到: <p>这是&quot;引号&quot;示例</p>
+
+

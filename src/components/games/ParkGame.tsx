@@ -57,7 +57,7 @@ export default function ParkGame() {
         <div className="space-y-3 text-gray-600">
           <p className="text-sm">1. 每轮8人参与，进行两轮</p>
           <p className="text-sm">2. 游戏开始，大家围成一圈，2人一队</p>
-          <p className="text-sm">3. 主持人说"星期天，逛三园"，所有人接"什么园"</p>
+          <p className="text-sm">3. 主持人说&quot;星期天，逛三园&quot;，所有人接&quot;什么园&quot;</p>
           <p className="text-sm">4. 主持人指定园区（水果园/蔬菜园/动物园）</p>
           <p className="text-sm">5. 每个小队轮流说出与选定园区相关的事物</p>
           <p className="text-sm">6. <span className="font-medium">每个人只能说一个字</span>，需小队成员共同完成</p>

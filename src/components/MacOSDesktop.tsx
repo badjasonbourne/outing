@@ -7,6 +7,7 @@ import MacOSWindow from './MacOSWindow';
 import ParkGame from './games/ParkGame';
 import DrawGuessGame from './games/DrawGuessGame';
 import ChineseWhispersGame from './games/ChineseWhispersGame';
+import Image from 'next/image';
 
 // 桌面图标组件
 function DesktopIcon({ name, icon, onClick }: { name: string; icon: string; onClick: () => void }) {
@@ -113,7 +114,13 @@ export default function MacOSDesktop() {
           transition={{ duration: 1 }}
           className="flex flex-col items-center"
         >
-          <span className="text-7xl mb-8">🖥️</span>
+          <Image 
+            src="/images/go.png" 
+            alt="进入系统" 
+            className="w-[200px] h-auto mb-8"
+            width={200}
+            height={100}
+          />
           <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
             <motion.div 
               className="h-full bg-gray-500 rounded-full"

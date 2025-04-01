@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   const images = [
@@ -45,10 +46,12 @@ export default function Home() {
             }}
             className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full overflow-hidden border-4 border-white shadow-lg"
           >
-            <img 
+            <Image 
               src={images[currentImageIndex].src} 
               alt={images[currentImageIndex].alt} 
               className="w-full h-full object-cover rounded-full"
+              width={200}
+              height={200}
             />
           </motion.div>
         </AnimatePresence>
@@ -66,10 +69,12 @@ export default function Home() {
           href="/games" 
           className="inline-block"
         >
-          <img 
+          <Image 
             src="/images/go.png" 
             alt="进入系统" 
             className="w-[200px] h-auto"
+            width={200}
+            height={100}
           />
         </Link>
       </motion.div>
