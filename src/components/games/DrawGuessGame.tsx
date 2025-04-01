@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import RulesModal from './RulesModal';
 
 const DRAW_WORDS = [
   '篮球', '雨伞', '手机', '电视', '冰箱', 
@@ -60,36 +61,28 @@ export default function DrawGuessGame() {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-semibold text-gray-800">你猜我画</h1>
         <button 
-          onClick={() => setShowRules(!showRules)}
-          className="px-3 py-1 text-xs font-medium bg-[#F2F2F7] text-gray-600 rounded-full"
+          onClick={() => setShowRules(true)}
+          className="px-3 py-1 text-xs font-medium bg-[#F2F2F7] text-gray-600 rounded-full hover:bg-gray-200 transition-colors"
         >
-          {showRules ? '隐藏规则' : '查看规则'}
+          查看规则
         </button>
       </div>
 
-      {/* 游戏说明 */}
-      <AnimatePresence>
-        {showRules && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="mb-4 overflow-hidden"
-          >
-            <div className="bg-[#F2F2F7] p-3 rounded-lg mb-2">
-              <h2 className="text-sm font-medium mb-2 text-gray-800">游戏规则</h2>
-              <div className="space-y-1 text-xs text-gray-600">
-                <p>1. 将参与者分成若干小组，每组至少3人</p>
-                <p>2. 每轮选择一名"画手"，其他队员作为"猜测者"</p>
-                <p>3. "画手"查看词语，用画图方式表达，<span className="font-medium">不能说话或做手势</span></p>
-                <p>4. "猜测者"根据画面猜测词语，限时60秒</p>
-                <p>5. 每轮结束后更换"画手"</p>
-                <p>6. 猜对词语最多的小组获胜</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* 规则模态窗 */}
+      <RulesModal
+        isOpen={showRules}
+        onClose={() => setShowRules(false)}
+        title="游戏规则"
+      >
+        <div className="space-y-3 text-gray-600">
+          <p className="text-sm">1. 将参与者分成若干小组，每组至少3人</p>
+          <p className="text-sm">2. 每轮选择一名"画手"，其他队员作为"猜测者"</p>
+          <p className="text-sm">3. "画手"查看词语，用画图方式表达，<span className="font-medium">不能说话或做手势</span></p>
+          <p className="text-sm">4. "猜测者"根据画面猜测词语，限时60秒</p>
+          <p className="text-sm">5. 每轮结束后更换"画手"</p>
+          <p className="text-sm">6. 猜对词语最多的小组获胜</p>
+        </div>
+      </RulesModal>
 
       {/* 计时器 */}
       <div className="bg-[#F2F2F7] rounded-lg p-4 mb-4 flex items-center justify-between">

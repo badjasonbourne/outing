@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import RulesModal from './RulesModal';
 
 // 传声筒游戏的句子
 const WHISPER_SENTENCES = [
@@ -42,36 +43,28 @@ export default function ChineseWhispersGame() {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-xl font-semibold text-gray-800">传声筒</h1>
         <button 
-          onClick={() => setShowRules(!showRules)}
-          className="px-3 py-1 text-xs font-medium bg-[#F2F2F7] text-gray-600 rounded-full"
+          onClick={() => setShowRules(true)}
+          className="px-3 py-1 text-xs font-medium bg-[#F2F2F7] text-gray-600 rounded-full hover:bg-gray-200 transition-colors"
         >
-          {showRules ? '隐藏规则' : '查看规则'}
+          查看规则
         </button>
       </div>
 
-      {/* 游戏说明 */}
-      <AnimatePresence>
-        {showRules && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="mb-4 overflow-hidden"
-          >
-            <div className="bg-[#F2F2F7] p-3 rounded-lg mb-2">
-              <h2 className="text-sm font-medium mb-2 text-gray-800">游戏规则</h2>
-              <div className="space-y-1 text-xs text-gray-600">
-                <p>1. 将参与者排成一排或一圈</p>
-                <p>2. 第一位参与者查看屏幕上的句子，并小声在第二位参与者耳边说出该句子</p>
-                <p>3. 第二位参与者听到后，再传递给第三位，以此类推</p>
-                <p>4. 最后一位参与者大声说出他/她所听到的句子</p>
-                <p>5. 对比最初和最终的句子，看看信息传递过程中的变化</p>
-                <p>6. 可以分成多组同时进行，比较哪组传递的信息更准确</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* 规则模态窗 */}
+      <RulesModal
+        isOpen={showRules}
+        onClose={() => setShowRules(false)}
+        title="游戏规则"
+      >
+        <div className="space-y-3 text-gray-600">
+          <p className="text-sm">1. 将参与者排成一排或一圈</p>
+          <p className="text-sm">2. 第一位参与者查看屏幕上的句子，并小声在第二位参与者耳边说出该句子</p>
+          <p className="text-sm">3. 第二位参与者听到后，再传递给第三位，以此类推</p>
+          <p className="text-sm">4. 最后一位参与者大声说出他/她所听到的句子</p>
+          <p className="text-sm">5. 对比最初和最终的句子，看看信息传递过程中的变化</p>
+          <p className="text-sm">6. 可以分成多组同时进行，比较哪组传递的信息更准确</p>
+        </div>
+      </RulesModal>
 
       {/* 难度选择 */}
       <div className="bg-[#F2F2F7] rounded-lg p-4 mb-4">

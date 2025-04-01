@@ -54,8 +54,6 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
       drag={!isFullScreen}
       dragControls={dragControls}
       dragMomentum={false}
-      dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
-      dragElastic={0.1}
       dragListener={false} // 只允许在标题栏拖动
     >
       {/* 窗口标题栏 */}
