@@ -12,35 +12,20 @@ export default function Home() {
         backgroundImage: 'radial-gradient(circle at center, #ffffff 0%, #f5f5f7 100%)',
       }}
     >
-      {/* Logo与动画 */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="mb-8"
-      >
-        <span className="text-8xl">🖥️</span>
-      </motion.div>
       
-      {/* 主标题 */}
-      <motion.h1
+      {/* 轮换图片 */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="text-4xl md:text-5xl font-semibold mb-6 text-gray-800 text-center"
+        className="mb-12"
       >
-        团建活动游戏系统
-      </motion.h1>
-      
-      {/* 副标题 */}
-      <motion.p 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="text-lg md:text-xl text-gray-500 mb-12 text-center max-w-xl px-6"
-      >
-        一站式团建活动游戏管理系统，为您的团队提供丰富多彩的互动体验
-      </motion.p>
+        <img 
+          src="/images/beer.png" 
+          alt="Beer" 
+          className="max-w-[200px] md:max-w-[250px]"
+        />
+      </motion.div>
       
       {/* 开始按钮 */}
       <motion.div
