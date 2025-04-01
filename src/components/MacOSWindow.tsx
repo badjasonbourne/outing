@@ -20,19 +20,19 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
     <div className="flex space-x-2">
       <button 
         onClick={onClose}
-        className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+        className="w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-500 transition-colors"
       />
-      <div className="w-3 h-3 rounded-full bg-yellow-500" />
+      <div className="w-3 h-3 rounded-full bg-gray-300" />
       <button 
         onClick={() => setIsFullScreen(!isFullScreen)}
-        className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors"
+        className="w-3 h-3 rounded-full bg-gray-500 hover:bg-gray-600 transition-colors"
       />
     </div>
   );
 
   return (
     <motion.div
-      className={`absolute top-[10%] left-1/2 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden ${
+      className={`absolute top-[10%] left-1/2 bg-gray-100 rounded-lg shadow-xl border border-gray-300 overflow-hidden ${
         isFullScreen ? 'fixed inset-0 z-50 m-0 rounded-none' : 'max-w-6xl w-[90vw] h-[80vh]'
       }`}
       initial={{ 
@@ -71,13 +71,13 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
       >
         {windowControls}
         <div className="flex-1 text-center">
-          <h3 className="text-white font-medium text-sm">{title}</h3>
+          <h3 className="text-gray-100 font-medium text-sm">{title}</h3>
         </div>
         <div className="w-12"></div> {/* 为了平衡标题栏布局 */}
       </motion.div>
       
       {/* 窗口内容 */}
-      <div className="h-[calc(100%-40px)] overflow-y-auto p-6 bg-white">
+      <div className="h-[calc(100%-40px)] overflow-y-auto p-6 bg-gray-50">
         {children}
       </div>
     </motion.div>

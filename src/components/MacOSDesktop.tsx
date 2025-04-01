@@ -18,7 +18,7 @@ function DesktopIcon({ name, icon, onClick }: { name: string; icon: string; onCl
       onClick={onClick}
     >
       <div className="text-3xl mb-1">{icon}</div>
-      <div className="text-white text-sm font-medium px-2 py-1 text-center rounded bg-black/20 backdrop-blur-sm group-hover:bg-black/30">
+      <div className="text-white text-sm font-medium px-2 py-1 text-center rounded bg-gray-800/30 backdrop-blur-sm group-hover:bg-gray-800/40">
         {name}
       </div>
     </motion.div>
@@ -74,17 +74,17 @@ export default function MacOSDesktop() {
   const windowConfig = {
     parks: {
       title: '多人配合版逛三园',
-      color: 'bg-yellow-500',
+      color: 'bg-gray-600',
       content: <ParkGame />
     },
     drawGuess: {
       title: '你猜我画',
-      color: 'bg-pink-500',
+      color: 'bg-gray-700',
       content: <DrawGuessGame />
     },
     whispers: {
       title: '传声筒',
-      color: 'bg-green-500',
+      color: 'bg-gray-800',
       content: <ChineseWhispersGame />
     }
   };
@@ -92,17 +92,17 @@ export default function MacOSDesktop() {
   // 引导界面
   if (isBooting) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-black">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className="flex flex-col items-center"
         >
-          <span className="text-7xl mb-8">🍎</span>
-          <div className="w-20 h-3 bg-gray-800 rounded-full overflow-hidden">
+          <span className="text-7xl mb-8">🌐</span>
+          <div className="w-20 h-3 bg-gray-700 rounded-full overflow-hidden">
             <motion.div 
-              className="h-full bg-white rounded-full"
+              className="h-full bg-gray-400 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: '100%' }}
               transition={{ duration: 1.5 }}
@@ -116,13 +116,13 @@ export default function MacOSDesktop() {
   return (
     <div className="min-h-screen relative overflow-hidden" 
          style={{ 
-           backgroundColor: '#2d5b7f',
-           backgroundImage: 'radial-gradient(circle at center, #5a93c7 0%, #2d5b7f 100%)',
+           backgroundColor: '#2e3440',
+           backgroundImage: 'radial-gradient(circle at center, #434c5e 0%, #2e3440 100%)',
          }}>
       {/* 顶部状态栏 */}
-      <div className="fixed top-0 left-0 right-0 h-8 bg-black/20 backdrop-blur-lg z-50 flex items-center justify-between px-4 text-white">
+      <div className="fixed top-0 left-0 right-0 h-8 bg-gray-900/50 backdrop-blur-lg z-50 flex items-center justify-between px-4 text-gray-200">
         <div className="flex items-center gap-4">
-          <span className="text-xl">🍎</span>
+          <span className="text-xl">🌐</span>
           <span className="font-semibold">团建游戏系统</span>
           <span>文件</span>
           <span>编辑</span>

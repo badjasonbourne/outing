@@ -54,3 +54,9 @@ body {
 .button-secondary:hover {
   background-color: #eaeaec;
 }
+
+/* 卡片翻转相关样式 */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
