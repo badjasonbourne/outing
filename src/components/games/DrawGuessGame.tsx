@@ -5,15 +5,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import RulesModal from './RulesModal';
 
 const DRAW_WORDS = [
-  '篮球', '雨伞', '手机', '电视', '冰箱', 
-  '眼镜', '飞机', '汽车', '蛋糕', '椅子'
+  '蜡笔小新', '瑞幸咖啡', '玲娜贝尔', '桃园三结义', '波斯猫', 
+  '蜘蛛侠', '自拍杆', '京东总部2号楼', '微波炉', '空气炸锅',
+  '海绵宝宝', '清明节', '中秋节', '没头脑和不高兴'
 ];
 
 export default function DrawGuessGame() {
-  const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
+  const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [showWord, setShowWord] = useState(false);
 
   // 计时器逻辑
   useEffect(() => {
@@ -50,9 +52,16 @@ export default function DrawGuessGame() {
     setIsTimerRunning(false);
   };
 
-  // 显示单个词语
-  const showWord = (index: number) => {
-    setActiveWordIndex(index);
+  // 切换到下一个词
+  const nextWord = () => {
+    setActiveWordIndex((prev) => (prev + 1) % DRAW_WORDS.length);
+    resetTimer();
+  };
+
+  // 切换到上一个词
+  const prevWord = () => {
+    setActiveWordIndex((prev) => (prev - 1 + DRAW_WORDS.length) % DRAW_WORDS.length);
+    resetTimer();
   };
 
   return (
@@ -123,52 +132,64 @@ export default function DrawGuessGame() {
       </div>
 
       {/* 词汇展示区域 */}
-      <div className="flex-1">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-sm font-medium text-gray-600">选择词语</h3>
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="flex items-center justify-between w-full max-w-md bg-[#F2F2F7] rounded-lg px-4 py-6 mb-4">
+          <button 
+            onClick={prevWord}
+            className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-500 hover:bg-gray-50 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={DRAW_WORDS[activeWordIndex]}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="text-center"
+            >
+              <h2 className="text-2xl font-bold text-gray-800">
+                {showWord ? DRAW_WORDS[activeWordIndex] : `第 ${activeWordIndex + 1} / ${DRAW_WORDS.length} 个词`}
+              </h2>
+            </motion.div>
+          </AnimatePresence>
+          
+          <button 
+            onClick={nextWord}
+            className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm text-gray-500 hover:bg-gray-50 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
-        
-        <AnimatePresence mode="wait">
-          {activeWordIndex !== null ? (
-            <motion.div 
-              key="selected-word"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="flex flex-col items-center justify-center h-48"
-            >
-              <div className="bg-white px-10 py-8 rounded-lg text-center shadow-sm border border-gray-100 mb-3">
-                <span className="text-3xl font-bold text-gray-800">{DRAW_WORDS[activeWordIndex]}</span>
-              </div>
-              
-              <button 
-                onClick={() => setActiveWordIndex(null)}
-                className="px-4 py-1.5 bg-[#F2F2F7] text-gray-600 text-xs font-medium rounded-full"
-              >
-                返回列表
-              </button>
-            </motion.div>
-          ) : (
-            <motion.div 
-              key="word-grid"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2"
-            >
-              {DRAW_WORDS.map((word, index) => (
-                <motion.div
-                  key={word}
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-white px-2 py-3 rounded-lg text-center shadow-sm hover:shadow-md cursor-pointer transition-shadow"
-                  onClick={() => showWord(index)}
-                >
-                  <span className="text-sm font-medium text-gray-600">词语 {index + 1}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+
+        {/* 显示词语按钮 */}
+        <button
+          onMouseDown={() => setShowWord(true)}
+          onMouseUp={() => setShowWord(false)}
+          onMouseLeave={() => setShowWord(false)}
+          onTouchStart={() => setShowWord(true)}
+          onTouchEnd={() => setShowWord(false)}
+          className="px-6 py-4 bg-black text-white font-medium rounded-lg shadow-sm hover:bg-gray-800 transition-colors w-full max-w-md"
+        >
+          显示词语
+        </button>
+
+        {/* 当前进度指示器 */}
+        <div className="flex gap-2 mt-4">
+          {DRAW_WORDS.map((_, index) => (
+            <div 
+              key={index}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === activeWordIndex ? 'bg-gray-800' : 'bg-gray-300'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

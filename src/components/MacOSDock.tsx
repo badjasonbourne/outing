@@ -52,16 +52,16 @@ export default function MacOSDock({
             variants={tooltipVariants}
             initial="hidden"
             animate="visible"
-            className="absolute mb-16 px-3 py-1 bg-gray-800/80 backdrop-blur-sm text-white text-xs rounded-md"
+            className="absolute bottom-[calc(100%+2px)] px-3 py-1.5 bg-gray-800/90 backdrop-blur-sm text-white text-xs rounded-md whitespace-nowrap"
           >
             {displayName}
           </motion.div>
         )}
         <motion.div
-          className={`relative flex items-center justify-center w-12 h-12 rounded-xl ${iconBg} border border-gray-100 cursor-pointer shadow-sm`}
+          className={`relative flex items-center justify-center w-10 h-10 rounded-xl ${iconBg} border border-gray-100 cursor-pointer shadow-sm`}
           whileHover={{ 
-            scale: 1.15,
-            y: -5,
+            scale: 1.1,
+            y: -3,
             transition: { type: "spring", stiffness: 400, damping: 15 }
           }}
           onHoverStart={() => setHoveredIcon(name)}
@@ -73,7 +73,7 @@ export default function MacOSDock({
               : '0 2px 4px rgba(0,0,0,0.05)'
           }}
         >
-          <span className="text-2xl">{iconSymbol}</span>
+          <span className="text-xl">{iconSymbol}</span>
           {isActive && (
             <div className="absolute -bottom-1.5 w-1 h-1 rounded-full bg-[#007AFF]"></div>
           )}
@@ -85,7 +85,7 @@ export default function MacOSDock({
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center z-50">
       <motion.div 
-        className="h-16 px-6 rounded-2xl backdrop-blur-xl bg-white/80 border border-[rgba(0,0,0,0.05)] shadow-lg flex items-center gap-4"
+        className="h-14 px-5 rounded-2xl backdrop-blur-xl bg-white/80 border border-[rgba(0,0,0,0.05)] shadow-lg flex items-center gap-3"
         style={{ borderWidth: '0.5px' }}
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

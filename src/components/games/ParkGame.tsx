@@ -7,8 +7,16 @@ import RulesModal from './RulesModal';
 // 园区数据
 const PARKS_DATA = [
   { name: '例子：动物园', icon: '🦁' },
-  { name: '植物园', icon: '🌺' },
-  { name: '游乐园', icon: '🎡' }
+  { name: '京东园', icon: '🛒' },
+  { name: '美酒园', icon: '🍷' },
+  { name: '汽车园', icon: '🚗' },
+  { name: '猫猫园', icon: '🐱' },
+  { name: '汪汪园', icon: '🐶' },
+  { name: '鲜花园', icon: '🌹' },
+  { name: '节日园', icon: '🎉' },
+  { name: '电器园', icon: '💻' },
+  { name: '知识园', icon: '📚' },
+  { name: '地理园', icon: '🌍' }
 ];
 
 export default function ParkGame() {
