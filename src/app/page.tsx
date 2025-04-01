@@ -48,13 +48,22 @@ export default function Home() {
               damping: 20,
               duration: 0.8
             }}
-            className="w-full h-full"
+            className="w-full h-full rounded-full overflow-hidden"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
           >
-            <img 
-              src={images[currentImageIndex].src} 
-              alt={images[currentImageIndex].alt} 
-              className="w-full h-full object-cover"
-            />
+            <div className="w-full h-full rounded-full overflow-hidden">
+              <img 
+                src={images[currentImageIndex].src} 
+                alt={images[currentImageIndex].alt} 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
         </AnimatePresence>
       </motion.div>
