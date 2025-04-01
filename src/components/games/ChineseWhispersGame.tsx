@@ -39,16 +39,16 @@ export default function ChineseWhispersGame() {
     <div className="flex flex-col space-y-8">
       {/* 游戏标题 */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-300 drop-shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
           传声筒
         </h1>
         <div className="h-1 w-32 md:w-48 bg-green-400 mx-auto rounded-full"></div>
       </div>
 
       {/* 游戏说明 */}
-      <div className="bg-white/20 p-4 rounded-lg">
-        <h2 className="text-2xl font-bold mb-2">游戏规则</h2>
-        <div className="space-y-2 text-lg">
+      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h2 className="text-2xl font-bold mb-3 text-gray-800">游戏规则</h2>
+        <div className="space-y-2 text-gray-700">
           <p>1. 将参与者排成一排或一圈</p>
           <p>2. 第一位参与者查看屏幕上的句子，并小声在第二位参与者耳边说出该句子</p>
           <p>3. 第二位参与者听到后，再传递给第三位，以此类推</p>
@@ -59,17 +59,17 @@ export default function ChineseWhispersGame() {
       </div>
 
       {/* 难度选择 */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <span className="text-xl font-medium">难度：</span>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-gray-50 p-5 rounded-lg border border-gray-100">
+        <span className="text-lg font-medium text-gray-700">难度：</span>
         <div className="flex gap-2">
           {(['简单', '中等', '困难'] as const).map((level) => (
             <button
               key={level}
               onClick={() => setDifficulty(level)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-5 py-2 rounded-full font-medium transition-colors ${
                 difficulty === level 
-                  ? 'bg-white text-blue-700 font-bold' 
-                  : 'bg-white/20 hover:bg-white/30'
+                  ? 'bg-black text-white' 
+                  : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100'
               }`}
             >
               {level}
@@ -79,8 +79,8 @@ export default function ChineseWhispersGame() {
       </div>
 
       {/* 句子展示区域 */}
-      <div className="bg-white/20 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-4">选择句子</h3>
+      <div className="bg-gray-50 rounded-lg p-6 border border-gray-100">
+        <h3 className="text-xl font-bold mb-6 text-gray-800">选择句子</h3>
         
         {activeSentenceIndex !== null ? (
           <div className="flex flex-col items-center">
@@ -89,16 +89,16 @@ export default function ChineseWhispersGame() {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="bg-white/30 px-8 py-6 rounded-lg text-center mb-6 max-w-2xl"
+              className="bg-white px-8 py-6 rounded-lg text-center mb-6 max-w-2xl shadow-sm border border-green-200"
             >
-              <span className={`font-bold ${getFontSizeByDifficulty()}`}>
+              <span className={`font-bold text-gray-800 ${getFontSizeByDifficulty()}`}>
                 {WHISPER_SENTENCES[activeSentenceIndex]}
               </span>
             </motion.div>
             
             <button 
               onClick={() => setActiveSentenceIndex(null)}
-              className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg"
+              className="px-6 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full font-medium transition-colors"
             >
               返回列表
             </button>
@@ -108,14 +108,14 @@ export default function ChineseWhispersGame() {
             {WHISPER_SENTENCES.map((sentence, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/10 p-3 rounded-lg hover:bg-white/20 cursor-pointer flex items-center"
+                whileHover={{ scale: 1.01 }}
+                className="bg-white p-3 rounded-lg hover:bg-green-50 cursor-pointer flex items-center border border-gray-100"
                 onClick={() => showSentence(index)}
               >
-                <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center mr-3">
-                  <span className="font-bold">{index + 1}</span>
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                  <span className="font-bold text-gray-700">{index + 1}</span>
                 </div>
-                <span className="text-lg font-medium truncate">
+                <span className="text-lg font-medium text-gray-700 truncate">
                   {sentence.length > 20 ? `${sentence.substring(0, 20)}...` : sentence}
                 </span>
               </motion.div>

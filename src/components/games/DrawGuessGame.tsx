@@ -57,16 +57,16 @@ export default function DrawGuessGame() {
     <div className="flex flex-col space-y-8">
       {/* 游戏标题 */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-pink-300 drop-shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
           你猜我画
         </h1>
         <div className="h-1 w-32 md:w-48 bg-pink-400 mx-auto rounded-full"></div>
       </div>
 
       {/* 游戏说明 */}
-      <div className="bg-white/20 p-4 rounded-lg">
-        <h2 className="text-2xl font-bold mb-2">游戏规则</h2>
-        <div className="space-y-2 text-lg">
+      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h2 className="text-2xl font-bold mb-3 text-gray-800">游戏规则</h2>
+        <div className="space-y-2 text-gray-700">
           <p>1. 将参与者分成若干小组，每组至少3人</p>
           <p>2. 每轮游戏选择一名队员作为"画手"，其他队员作为"猜测者"</p>
           <p>3. "画手"查看屏幕上显示的词语，用画图方式表达，<span className="font-bold">不能说话或做手势</span></p>
@@ -77,16 +77,18 @@ export default function DrawGuessGame() {
       </div>
 
       {/* 计时器 */}
-      <div className="flex flex-col items-center">
-        <div className="text-2xl mb-4">倒计时：{timeLeft} 秒</div>
-        <div className="flex space-x-4">
+      <div className="flex flex-col items-center bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <div className="text-3xl font-bold mb-6 text-gray-800">
+          {timeLeft} <span className="text-xl font-medium text-gray-500">秒</span>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
           <button 
             onClick={startTimer}
             disabled={isTimerRunning}
-            className={`px-4 py-2 rounded-lg font-medium ${
+            className={`px-5 py-2 rounded-full font-medium transition-colors ${
               isTimerRunning 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-green-500 hover:bg-green-600'
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-green-500 text-white hover:bg-green-600'
             }`}
           >
             开始
@@ -94,17 +96,17 @@ export default function DrawGuessGame() {
           <button 
             onClick={stopTimer}
             disabled={!isTimerRunning}
-            className={`px-4 py-2 rounded-lg font-medium ${
+            className={`px-5 py-2 rounded-full font-medium transition-colors ${
               !isTimerRunning 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-red-500 hover:bg-red-600'
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-red-500 text-white hover:bg-red-600'
             }`}
           >
             暂停
           </button>
           <button 
             onClick={resetTimer}
-            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium"
+            className="px-5 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full font-medium transition-colors"
           >
             重置
           </button>
@@ -112,8 +114,8 @@ export default function DrawGuessGame() {
       </div>
 
       {/* 词汇选择区域 */}
-      <div className="bg-white/20 rounded-lg p-6">
-        <h3 className="text-xl font-bold mb-4">选择词语</h3>
+      <div className="bg-gray-50 rounded-lg p-6 border border-gray-100">
+        <h3 className="text-xl font-bold mb-6 text-gray-800">选择词语</h3>
         
         {activeWordIndex !== null ? (
           <div className="flex flex-col items-center">
@@ -122,14 +124,14 @@ export default function DrawGuessGame() {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="bg-white/30 px-12 py-8 rounded-lg text-center mb-6"
+              className="bg-white px-12 py-8 rounded-lg text-center shadow-sm border border-pink-200 mb-6"
             >
-              <span className="text-4xl font-bold">{DRAW_WORDS[activeWordIndex]}</span>
+              <span className="text-4xl font-bold text-gray-800">{DRAW_WORDS[activeWordIndex]}</span>
             </motion.div>
             
             <button 
               onClick={() => setActiveWordIndex(null)}
-              className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg"
+              className="px-6 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full font-medium transition-colors"
             >
               返回列表
             </button>
@@ -139,11 +141,11 @@ export default function DrawGuessGame() {
             {DRAW_WORDS.map((word, index) => (
               <motion.div
                 key={word}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/10 px-3 py-6 rounded-lg text-center hover:bg-white/20 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                className="bg-white px-3 py-6 rounded-lg text-center hover:bg-pink-50 cursor-pointer border border-gray-100"
                 onClick={() => showWord(index)}
               >
-                <span className="text-lg font-medium">词语 {index + 1}</span>
+                <span className="text-lg font-medium text-gray-600">词语 {index + 1}</span>
               </motion.div>
             ))}
           </div>

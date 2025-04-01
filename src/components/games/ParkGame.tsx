@@ -56,16 +56,16 @@ export default function ParkGame() {
     <div className="flex flex-col space-y-8">
       {/* 游戏标题 */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-yellow-300 drop-shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
           多人配合版逛三园
         </h1>
         <div className="h-1 w-32 md:w-48 bg-yellow-400 mx-auto rounded-full"></div>
       </div>
 
       {/* 游戏说明 */}
-      <div className="bg-white/20 p-4 rounded-lg">
-        <h2 className="text-2xl font-bold mb-2">游戏规则</h2>
-        <div className="space-y-2 text-lg">
+      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+        <h2 className="text-2xl font-bold mb-3 text-gray-800">游戏规则</h2>
+        <div className="space-y-2 text-gray-700">
           <p>1. 将参与者分成若干小组，每组3-5人</p>
           <p>2. 每组选出一名成员作为"描述者"，其他成员作为"猜测者"</p>
           <p>3. "描述者"需要描述屏幕上显示的词语，但<span className="font-bold">不能直接说出该词语或其中的字</span></p>
@@ -79,47 +79,49 @@ export default function ParkGame() {
       <div className="flex items-center justify-center gap-4">
         <button 
           onClick={prevPark}
-          className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+          className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         
-        <motion.h2 
+        <motion.div
           key={activePark.name}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
-          className="text-3xl md:text-4xl font-bold"
+          className="bg-yellow-50 px-6 py-3 rounded-full border border-yellow-200"
         >
-          {activePark.name}
-        </motion.h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-yellow-800">
+            {activePark.name}
+          </h2>
+        </motion.div>
         
         <button 
           onClick={nextPark}
-          className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+          className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
 
       {/* 词汇展示区域 */}
-      <div className="bg-white/20 rounded-lg p-6">
-        <div className="flex justify-between mb-4">
-          <h3 className="text-xl font-bold">词汇列表</h3>
-          <div className="flex gap-2">
-            <button 
-              onClick={toggleWordsDisplay}
-              className={`px-4 py-1 rounded-md transition-colors ${
-                showAllWords ? 'bg-blue-500 text-white' : 'bg-white/30 hover:bg-white/40'
-              }`}
-            >
-              {showAllWords ? '隐藏全部' : '显示全部'}
-            </button>
-          </div>
+      <div className="bg-gray-50 rounded-lg p-6 border border-gray-100">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-gray-800">词汇列表</h3>
+          <button 
+            onClick={toggleWordsDisplay}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              showAllWords 
+                ? 'bg-black text-white' 
+                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+            }`}
+          >
+            {showAllWords ? '隐藏全部' : '显示全部'}
+          </button>
         </div>
         
         {showAllWords ? (
@@ -130,10 +132,10 @@ export default function ParkGame() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                className="bg-white/30 px-3 py-4 rounded-lg text-center hover:bg-white/40 cursor-pointer"
+                className="bg-white px-3 py-4 rounded-lg text-center hover:bg-yellow-50 cursor-pointer border border-gray-100"
                 onClick={() => showWord(index)}
               >
-                <span className="text-lg font-medium">{word}</span>
+                <span className="text-lg font-medium text-gray-800">{word}</span>
               </motion.div>
             ))}
           </div>
@@ -144,9 +146,9 @@ export default function ParkGame() {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="bg-white/30 px-12 py-8 rounded-lg text-center"
+              className="bg-white px-12 py-8 rounded-lg text-center shadow-sm border border-yellow-200"
             >
-              <span className="text-4xl font-bold">{activePark.words[activeWordIndex]}</span>
+              <span className="text-4xl font-bold text-gray-800">{activePark.words[activeWordIndex]}</span>
             </motion.div>
           </div>
         ) : (
@@ -154,11 +156,11 @@ export default function ParkGame() {
             {activePark.words.map((_, index) => (
               <motion.div
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/10 px-3 py-4 rounded-lg text-center hover:bg-white/20 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                className="bg-white px-3 py-4 rounded-lg text-center hover:bg-yellow-50 cursor-pointer border border-gray-100"
                 onClick={() => showWord(index)}
               >
-                <span className="text-lg font-medium">词语 {index + 1}</span>
+                <span className="text-lg font-medium text-gray-600">词语 {index + 1}</span>
               </motion.div>
             ))}
           </div>
