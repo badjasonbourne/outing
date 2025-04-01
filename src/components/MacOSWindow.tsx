@@ -17,22 +17,22 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
   
   // 窗口控制按钮（关闭、最小化、最大化）
   const windowControls = (
-    <div className="flex space-x-2">
+    <div className="flex space-x-1.5">
       <button 
         onClick={onClose}
-        className="w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-500 transition-colors"
+        className="w-3 h-3 rounded-full bg-[#FF5F57] hover:bg-[#FF4A4A] transition-colors"
       />
-      <div className="w-3 h-3 rounded-full bg-gray-300" />
+      <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
       <button 
         onClick={() => setIsFullScreen(!isFullScreen)}
-        className="w-3 h-3 rounded-full bg-gray-500 hover:bg-gray-600 transition-colors"
+        className="w-3 h-3 rounded-full bg-[#28C840] hover:bg-[#25B73B] transition-colors"
       />
     </div>
   );
 
   return (
     <motion.div
-      className={`absolute top-[10%] left-1/2 bg-gray-100 rounded-lg shadow-xl border border-gray-300 overflow-hidden ${
+      className={`absolute top-[10%] left-1/2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden ${
         isFullScreen ? 'fixed inset-0 z-50 m-0 rounded-none' : 'max-w-6xl w-[90vw] h-[80vh]'
       }`}
       initial={{ 
@@ -60,7 +60,7 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
     >
       {/* 窗口标题栏 */}
       <motion.div 
-        className={`${color} px-4 py-3 flex items-center cursor-grab active:cursor-grabbing`}
+        className={`${color} px-3 py-2 flex items-center cursor-grab active:cursor-grabbing border-b border-gray-200`}
         onPointerDown={(e) => {
           if (!isFullScreen) {
             setIsDragging(true);
@@ -71,13 +71,13 @@ export default function MacOSWindow({ children, title, onClose, color }: MacOSWi
       >
         {windowControls}
         <div className="flex-1 text-center">
-          <h3 className="text-gray-100 font-medium text-sm">{title}</h3>
+          <h3 className="text-gray-600 font-medium text-xs">{title}</h3>
         </div>
-        <div className="w-12"></div> {/* 为了平衡标题栏布局 */}
+        <div className="w-10"></div> {/* 为了平衡标题栏布局 */}
       </motion.div>
       
       {/* 窗口内容 */}
-      <div className="h-[calc(100%-40px)] overflow-y-auto p-6 bg-gray-50">
+      <div className="h-[calc(100%-34px)] overflow-y-auto bg-white">
         {children}
       </div>
     </motion.div>

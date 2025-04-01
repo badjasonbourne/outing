@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DRAW_WORDS = [
   '篮球', '雨伞', '手机', '电视', '冰箱', 
@@ -12,6 +12,7 @@ export default function DrawGuessGame() {
   const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [showRules, setShowRules] = useState(false);
 
   // 计时器逻辑
   useEffect(() => {
@@ -54,41 +55,56 @@ export default function DrawGuessGame() {
   };
 
   return (
-    <div className="flex flex-col space-y-8">
-      {/* 游戏标题 */}
-      <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-          你猜我画
-        </h1>
-        <div className="h-1 w-32 md:w-48 bg-pink-400 mx-auto rounded-full"></div>
+    <div className="flex flex-col p-5 h-full">
+      {/* 顶部导航和标题 */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-xl font-semibold text-gray-800">你猜我画</h1>
+        <button 
+          onClick={() => setShowRules(!showRules)}
+          className="px-3 py-1 text-xs font-medium bg-[#F2F2F7] text-gray-600 rounded-full"
+        >
+          {showRules ? '隐藏规则' : '查看规则'}
+        </button>
       </div>
 
       {/* 游戏说明 */}
-      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-        <h2 className="text-2xl font-bold mb-3 text-gray-800">游戏规则</h2>
-        <div className="space-y-2 text-gray-700">
-          <p>1. 将参与者分成若干小组，每组至少3人</p>
-          <p>2. 每轮游戏选择一名队员作为"画手"，其他队员作为"猜测者"</p>
-          <p>3. "画手"查看屏幕上显示的词语，用画图方式表达，<span className="font-bold">不能说话或做手势</span></p>
-          <p>4. "猜测者"根据画面猜测词语，限时60秒</p>
-          <p>5. 每轮结束后更换"画手"，所有队员都应有机会担任"画手"</p>
-          <p>6. 猜对词语最多的小组获胜</p>
-        </div>
-      </div>
+      <AnimatePresence>
+        {showRules && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="mb-4 overflow-hidden"
+          >
+            <div className="bg-[#F2F2F7] p-3 rounded-lg mb-2">
+              <h2 className="text-sm font-medium mb-2 text-gray-800">游戏规则</h2>
+              <div className="space-y-1 text-xs text-gray-600">
+                <p>1. 将参与者分成若干小组，每组至少3人</p>
+                <p>2. 每轮选择一名"画手"，其他队员作为"猜测者"</p>
+                <p>3. "画手"查看词语，用画图方式表达，<span className="font-medium">不能说话或做手势</span></p>
+                <p>4. "猜测者"根据画面猜测词语，限时60秒</p>
+                <p>5. 每轮结束后更换"画手"</p>
+                <p>6. 猜对词语最多的小组获胜</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 计时器 */}
-      <div className="flex flex-col items-center bg-gray-50 p-6 rounded-lg border border-gray-100">
-        <div className="text-3xl font-bold mb-6 text-gray-800">
-          {timeLeft} <span className="text-xl font-medium text-gray-500">秒</span>
+      <div className="bg-[#F2F2F7] rounded-lg p-4 mb-4 flex items-center justify-between">
+        <div className="flex items-baseline">
+          <span className="text-3xl font-bold text-gray-800">{timeLeft}</span>
+          <span className="ml-1 text-sm font-medium text-gray-500">秒</span>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex gap-2">
           <button 
             onClick={startTimer}
             disabled={isTimerRunning}
-            className={`px-5 py-2 rounded-full font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
               isTimerRunning 
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                : 'bg-green-500 text-white hover:bg-green-600'
+                : 'bg-[#34C759] text-white'
             }`}
           >
             开始
@@ -96,60 +112,70 @@ export default function DrawGuessGame() {
           <button 
             onClick={stopTimer}
             disabled={!isTimerRunning}
-            className={`px-5 py-2 rounded-full font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
               !isTimerRunning 
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                : 'bg-red-500 text-white hover:bg-red-600'
+                : 'bg-[#FF3B30] text-white'
             }`}
           >
             暂停
           </button>
           <button 
             onClick={resetTimer}
-            className="px-5 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full font-medium transition-colors"
+            className="px-3 py-1.5 bg-white text-gray-800 text-xs font-medium rounded-md shadow-sm"
           >
             重置
           </button>
         </div>
       </div>
 
-      {/* 词汇选择区域 */}
-      <div className="bg-gray-50 rounded-lg p-6 border border-gray-100">
-        <h3 className="text-xl font-bold mb-6 text-gray-800">选择词语</h3>
+      {/* 词汇展示区域 */}
+      <div className="flex-1">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-sm font-medium text-gray-600">选择词语</h3>
+        </div>
         
-        {activeWordIndex !== null ? (
-          <div className="flex flex-col items-center">
-            <motion.div
-              key={DRAW_WORDS[activeWordIndex]}
-              initial={{ scale: 0.5, opacity: 0 }}
+        <AnimatePresence mode="wait">
+          {activeWordIndex !== null ? (
+            <motion.div 
+              key="selected-word"
+              initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="bg-white px-12 py-8 rounded-lg text-center shadow-sm border border-pink-200 mb-6"
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="flex flex-col items-center justify-center h-48"
             >
-              <span className="text-4xl font-bold text-gray-800">{DRAW_WORDS[activeWordIndex]}</span>
-            </motion.div>
-            
-            <button 
-              onClick={() => setActiveWordIndex(null)}
-              className="px-6 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full font-medium transition-colors"
-            >
-              返回列表
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {DRAW_WORDS.map((word, index) => (
-              <motion.div
-                key={word}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white px-3 py-6 rounded-lg text-center hover:bg-pink-50 cursor-pointer border border-gray-100"
-                onClick={() => showWord(index)}
+              <div className="bg-white px-10 py-8 rounded-lg text-center shadow-sm border border-gray-100 mb-3">
+                <span className="text-3xl font-bold text-gray-800">{DRAW_WORDS[activeWordIndex]}</span>
+              </div>
+              
+              <button 
+                onClick={() => setActiveWordIndex(null)}
+                className="px-4 py-1.5 bg-[#F2F2F7] text-gray-600 text-xs font-medium rounded-full"
               >
-                <span className="text-lg font-medium text-gray-600">词语 {index + 1}</span>
-              </motion.div>
-            ))}
-          </div>
-        )}
+                返回列表
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div 
+              key="word-grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2"
+            >
+              {DRAW_WORDS.map((word, index) => (
+                <motion.div
+                  key={word}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white px-2 py-3 rounded-lg text-center shadow-sm hover:shadow-md cursor-pointer transition-shadow"
+                  onClick={() => showWord(index)}
+                >
+                  <span className="text-sm font-medium text-gray-600">词语 {index + 1}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

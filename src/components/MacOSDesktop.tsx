@@ -74,17 +74,17 @@ export default function MacOSDesktop() {
   const windowConfig = {
     parks: {
       title: '多人配合版逛三园',
-      color: 'bg-gray-600',
+      color: 'bg-[#f8f8f8]',
       content: <ParkGame />
     },
     drawGuess: {
       title: '你猜我画',
-      color: 'bg-gray-700',
+      color: 'bg-[#f8f8f8]',
       content: <DrawGuessGame />
     },
     whispers: {
       title: '传声筒',
-      color: 'bg-gray-800',
+      color: 'bg-[#f8f8f8]',
       content: <ChineseWhispersGame />
     }
   };
@@ -92,17 +92,17 @@ export default function MacOSDesktop() {
   // 引导界面
   if (isBooting) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-white">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           className="flex flex-col items-center"
         >
-          <span className="text-7xl mb-8">🌐</span>
-          <div className="w-20 h-3 bg-gray-700 rounded-full overflow-hidden">
+          <span className="text-7xl mb-8">🖥️</span>
+          <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
             <motion.div 
-              className="h-full bg-gray-400 rounded-full"
+              className="h-full bg-gray-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: '100%' }}
               transition={{ duration: 1.5 }}
@@ -116,13 +116,13 @@ export default function MacOSDesktop() {
   return (
     <div className="min-h-screen relative overflow-hidden" 
          style={{ 
-           backgroundColor: '#2e3440',
-           backgroundImage: 'radial-gradient(circle at center, #434c5e 0%, #2e3440 100%)',
+           backgroundColor: '#fafafa',
+           backgroundImage: 'radial-gradient(circle at center, #ffffff 0%, #f5f5f7 100%)',
          }}>
       {/* 顶部状态栏 */}
-      <div className="fixed top-0 left-0 right-0 h-8 bg-gray-900/50 backdrop-blur-lg z-50 flex items-center justify-between px-4 text-gray-200">
+      <div className="fixed top-0 left-0 right-0 h-7 bg-[#f8f8f8] border-b border-gray-200 z-50 flex items-center justify-between px-4 text-gray-700">
         <div className="flex items-center gap-4">
-          <span className="text-xl">🌐</span>
+          <span className="text-lg">🖥️</span>
           <span className="font-semibold">团建游戏系统</span>
           <span>文件</span>
           <span>编辑</span>
@@ -130,30 +130,11 @@ export default function MacOSDesktop() {
           <span>窗口</span>
           <span>帮助</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-sm">
           <span>🔋 100%</span>
           <span>📶 Wi-Fi</span>
           <span>{currentTime}</span>
         </div>
-      </div>
-      
-      {/* 桌面图标 */}
-      <div className="pt-16 pl-6 grid grid-cols-1 gap-4">
-        <DesktopIcon 
-          name="关于我们" 
-          icon="📋" 
-          onClick={() => {}} 
-        />
-        <DesktopIcon 
-          name="游戏说明" 
-          icon="📖" 
-          onClick={() => {}} 
-        />
-        <DesktopIcon 
-          name="系统设置" 
-          icon="⚙️" 
-          onClick={() => {}} 
-        />
       </div>
       
       {/* 应用窗口 */}
