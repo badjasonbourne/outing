@@ -30,6 +30,7 @@ export default function MacOSDesktop() {
   const [currentDate, setCurrentDate] = useState('');
   const [openApps, setOpenApps] = useState<string[]>([]);
   const [isBooting, setIsBooting] = useState(true);
+  const [fullScreenAppId, setFullScreenAppId] = useState<string | null>(null);
   
   // 引导动画
   useEffect(() => {
@@ -67,7 +68,20 @@ export default function MacOSDesktop() {
 
   // 处理关闭应用
   const handleCloseApp = (app: string) => {
+    // 如果关闭的是当前全屏的应用，重置全屏状态
+    if (app === fullScreenAppId) {
+      setFullScreenAppId(null);
+    }
     setOpenApps(openApps.filter(a => a !== app));
+  };
+
+  // 处理全屏状态变化
+  const handleFullScreenChange = (appId: string, isFullScreen: boolean) => {
+    if (isFullScreen) {
+      setFullScreenAppId(appId);
+    } else if (fullScreenAppId === appId) {
+      setFullScreenAppId(null);
+    }
   };
 
   // 游戏窗口配置
@@ -120,7 +134,7 @@ export default function MacOSDesktop() {
            backgroundImage: 'radial-gradient(circle at center, #ffffff 0%, #f5f5f7 100%)',
          }}>
       {/* 顶部状态栏 */}
-      <div className="fixed top-0 left-0 right-0 h-7 bg-[#f8f8f8] border-b border-gray-200 z-50 flex items-center justify-between px-4 text-gray-700">
+      <div className={`fixed top-0 left-0 right-0 h-7 bg-[#f8f8f8] border-b border-gray-200 z-50 flex items-center justify-between px-4 text-gray-700 ${fullScreenAppId ? 'pointer-events-none' : ''}`}>
         <div className="flex items-center gap-4 text-[14px]">
           <span className="text-lg">🖥️</span>
           <span>团建游戏系统</span>
@@ -147,6 +161,7 @@ export default function MacOSDesktop() {
               title={title}
               color={color}
               onClose={() => handleCloseApp(app)}
+              onFullScreenChange={(isFullScreen) => handleFullScreenChange(app, isFullScreen)}
             >
               {content}
             </MacOSWindow>
@@ -154,8 +169,8 @@ export default function MacOSDesktop() {
         })}
       </AnimatePresence>
       
-      {/* Dock */}
-      <MacOSDock onOpenApp={handleOpenApp} openApps={openApps} />
+      {/* Dock - 在全屏模式下隐藏 */}
+      {fullScreenAppId === null && <MacOSDock onOpenApp={handleOpenApp} openApps={openApps} />}
     </div>
   );
 } 
