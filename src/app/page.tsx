@@ -57,16 +57,7 @@ export default function Home() {
           进入系统
         </Link>
       </motion.div>
-      
-      {/* 版权信息 */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="absolute bottom-8 text-gray-400 text-sm"
-      >
-        © 2023 团建活动展示系统
-      </motion.footer>
+    
     </main>
   );
 }
