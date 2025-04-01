@@ -1,9 +1,25 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const images = [
+    { src: '/images/beer.png', alt: 'Beer' },
+    { src: '/images/fruit.png', alt: 'Fruit' },
+    { src: '/images/Jazz.png', alt: 'Jazz' }
+  ];
+  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // 每3秒切换一次图片
+    
+    return () => clearInterval(interval);
+  }, [images.length]);
   return (
     <main 
       className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden" 
@@ -18,13 +34,29 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="mb-12"
+        className="mb-12 w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full overflow-hidden border-4 border-white shadow-lg relative"
       >
-        <img 
-          src="/images/beer.png" 
-          alt="Beer" 
-          className="max-w-[200px] md:max-w-[250px]"
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0, scale: 1.2, rotate: -10 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 20,
+              duration: 0.8
+            }}
+            className="w-full h-full"
+          >
+            <img 
+              src={images[currentImageIndex].src} 
+              alt={images[currentImageIndex].alt} 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
       
       {/* 开始按钮 */}
