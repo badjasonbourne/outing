@@ -1,48 +1,72 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col bg-white">
-      {/* 主要内容 */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl text-center"
+    <main 
+      className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden" 
+      style={{ 
+        backgroundColor: '#2d5b7f',
+        backgroundImage: 'radial-gradient(circle at center, #5a93c7 0%, #2d5b7f 100%)',
+      }}
+    >
+      {/* Logo与动画 */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="mb-8"
+      >
+        <span className="text-9xl">🍎</span>
+      </motion.div>
+      
+      {/* 主标题 */}
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="text-5xl md:text-7xl font-bold mb-6 text-white text-center"
+      >
+        团建活动游戏系统
+      </motion.h1>
+      
+      {/* 副标题 */}
+      <motion.p 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="text-xl md:text-2xl text-white/70 mb-12 text-center max-w-2xl px-6"
+      >
+        一站式团建活动游戏管理系统，为您的团队提供丰富多彩的互动体验
+      </motion.p>
+      
+      {/* 开始按钮 */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.7 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <Link 
+          href="/games" 
+          className="inline-block px-10 py-5 bg-white text-gray-800 text-xl font-medium rounded-full shadow-xl hover:bg-gray-100 transition-colors"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            让团队活动更加精彩
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-12">
-            一站式团建活动游戏管理系统，为您的团队提供丰富多彩的互动体验
-          </p>
-          
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Link 
-              href="/games" 
-              className="inline-block px-8 py-4 bg-black text-white text-lg font-medium rounded-full shadow-sm hover:bg-gray-800 transition-colors"
-            >
-              开始游戏
-            </Link>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* 页脚 */}
-      <footer className="py-8 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-8 text-center text-gray-500 text-sm">
-          <p>© 2023 团建活动展示系统 - 让团队建设更有趣</p>
-        </div>
-      </footer>
+          进入系统
+        </Link>
+      </motion.div>
+      
+      {/* 版权信息 */}
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1 }}
+        className="absolute bottom-8 text-white/50 text-sm"
+      >
+        © 2023 团建活动展示系统
+      </motion.footer>
     </main>
   );
 }

@@ -53,19 +53,19 @@ export default function ParkGame() {
   };
 
   return (
-    <div className="flex flex-col space-y-8">
+    <div className="flex flex-col space-y-5">
       {/* 游戏标题 */}
       <div className="text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
+        <h1 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800">
           多人配合版逛三园
         </h1>
-        <div className="h-1 w-32 md:w-48 bg-yellow-400 mx-auto rounded-full"></div>
+        <div className="h-1 w-28 md:w-40 bg-yellow-400 mx-auto rounded-full"></div>
       </div>
 
       {/* 游戏说明 */}
-      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-        <h2 className="text-2xl font-bold mb-3 text-gray-800">游戏规则</h2>
-        <div className="space-y-2 text-gray-700">
+      <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
+        <h2 className="text-xl font-bold mb-3 text-gray-800">游戏规则</h2>
+        <div className="space-y-1.5 text-gray-700 text-sm">
           <p>1. 将参与者分成若干小组，每组3-5人</p>
           <p>2. 每组选出一名成员作为"描述者"，其他成员作为"猜测者"</p>
           <p>3. "描述者"需要描述屏幕上显示的词语，但<span className="font-bold">不能直接说出该词语或其中的字</span></p>
@@ -93,7 +93,7 @@ export default function ParkGame() {
           exit={{ opacity: 0, x: -20 }}
           className="bg-yellow-50 px-6 py-3 rounded-full border border-yellow-200"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-yellow-800">
+          <h2 className="text-xl md:text-2xl font-bold text-yellow-800">
             {activePark.name}
           </h2>
         </motion.div>
@@ -109,9 +109,9 @@ export default function ParkGame() {
       </div>
 
       {/* 词汇展示区域 */}
-      <div className="bg-gray-50 rounded-lg p-6 border border-gray-100">
+      <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-gray-800">词汇列表</h3>
+          <h3 className="text-lg font-bold text-gray-800">词汇列表</h3>
           <button 
             onClick={toggleWordsDisplay}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
