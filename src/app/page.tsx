@@ -30,12 +30,7 @@ export default function Home() {
     >
       
       {/* 轮换图片 */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="mb-12 w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full overflow-hidden border-4 border-white shadow-lg relative"
-      >
+      <div className="mb-12 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
@@ -48,25 +43,16 @@ export default function Home() {
               damping: 20,
               duration: 0.8
             }}
-            className="w-full h-full rounded-full overflow-hidden"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-            }}
+            className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] rounded-full overflow-hidden border-4 border-white shadow-lg"
           >
-            <div className="w-full h-full rounded-full overflow-hidden">
-              <img 
-                src={images[currentImageIndex].src} 
-                alt={images[currentImageIndex].alt} 
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <img 
+              src={images[currentImageIndex].src} 
+              alt={images[currentImageIndex].alt} 
+              className="w-full h-full object-cover rounded-full"
+            />
           </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </div>
       
       {/* 开始按钮 */}
       <motion.div
