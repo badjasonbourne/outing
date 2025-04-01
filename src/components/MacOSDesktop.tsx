@@ -137,12 +137,11 @@ export default function MacOSDesktop() {
       <div className={`fixed top-0 left-0 right-0 h-7 bg-[#f8f8f8] border-b border-gray-200 z-50 flex items-center justify-between px-4 text-gray-700 ${fullScreenAppId ? 'pointer-events-none' : ''}`}>
         <div className="flex items-center gap-4 text-[14px]">
           <span className="text-lg">🖥️</span>
-          <span>团建游戏系统</span>
-          <span>文件</span>
-          <span>编辑</span>
-          <span>查看</span>
-          <span>窗口</span>
-          <span>帮助</span>
+          <span>团建游戏</span>
+          <span>放松</span>
+          <span>开心</span>
+          <span>享受</span>
+          <span>快乐</span>
         </div>
         <div className="flex items-center gap-4 text-[14px]">
           <span>🔋 100%</span>

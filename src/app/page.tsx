@@ -58,15 +58,19 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.7 }}
-        whileHover={{ scale: 1.03 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25, delay: 0.1 }}
+        whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.97 }}
       >
         <Link 
           href="/games" 
-          className="inline-block px-8 py-4 bg-[#007AFF] text-white text-base font-medium rounded-full shadow-md hover:bg-[#0066CC] transition-colors"
+          className="inline-block"
         >
-          进入系统
+          <img 
+            src="/images/go.png" 
+            alt="进入系统" 
+            className="w-[200px] h-auto"
+          />
         </Link>
       </motion.div>
     
