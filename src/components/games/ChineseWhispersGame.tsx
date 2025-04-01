@@ -20,17 +20,7 @@ const WHISPER_SENTENCES = [
 
 export default function ChineseWhispersGame() {
   const [activeSentenceIndex, setActiveSentenceIndex] = useState<number | null>(null);
-  const [difficulty, setDifficulty] = useState<'简单' | '中等' | '困难'>('中等');
   const [showRules, setShowRules] = useState(false);
-
-  // 根据难度获取字体大小
-  const getFontSizeByDifficulty = () => {
-    switch (difficulty) {
-      case '简单': return 'text-2xl';
-      case '中等': return 'text-xl';
-      case '困难': return 'text-base';
-    }
-  };
 
   // 显示单个句子
   const showSentence = (index: number) => {
@@ -66,28 +56,6 @@ export default function ChineseWhispersGame() {
         </div>
       </RulesModal>
 
-      {/* 难度选择 */}
-      <div className="bg-[#F2F2F7] rounded-lg p-4 mb-4">
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-gray-700">难度：</span>
-          <div className="flex">
-            {(['简单', '中等', '困难'] as const).map((level) => (
-              <button
-                key={level}
-                onClick={() => setDifficulty(level)}
-                className={`px-3 py-1 text-xs font-medium rounded-md transition-colors mx-1 ${
-                  difficulty === level 
-                    ? 'bg-white shadow-sm text-gray-800' 
-                    : 'bg-transparent text-gray-500'
-                }`}
-              >
-                {level}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* 句子展示区域 */}
       <div className="flex-1">
         <div className="flex justify-between items-center mb-4">
@@ -104,7 +72,7 @@ export default function ChineseWhispersGame() {
               className="flex flex-col items-center"
             >
               <div className="bg-white px-6 py-6 rounded-lg text-center mb-4 max-w-2xl shadow-sm border border-gray-100">
-                <span className={`font-medium text-gray-800 ${getFontSizeByDifficulty()}`}>
+                <span className="font-medium text-gray-800 text-xl">
                   {WHISPER_SENTENCES[activeSentenceIndex]}
                 </span>
               </div>

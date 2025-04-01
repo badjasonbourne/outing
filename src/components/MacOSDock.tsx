@@ -85,8 +85,10 @@ export default function MacOSDock({
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center z-50">
       <motion.div 
-        className="h-14 px-5 rounded-2xl backdrop-blur-xl bg-white/80 border border-[rgba(0,0,0,0.05)] shadow-lg flex items-center gap-3"
-        style={{ borderWidth: '0.5px' }}
+        className="h-14 px-[100px] rounded-2xl backdrop-blur-xl bg-white/80 flex items-center gap-3"
+        style={{ 
+          boxShadow: '0 0 1px rgba(0,0,0,0.5), 0 8px 30px rgba(0,0,0,0.1)'
+        }}
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
@@ -112,4 +114,4 @@ export default function MacOSDock({
       </motion.div>
     </div>
   );
-} 
+}
