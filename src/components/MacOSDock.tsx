@@ -46,7 +46,7 @@ export default function MacOSDock({
     }
     
     return (
-      <div className="h-16 flex items-end justify-center">
+      <div className="flex items-center justify-center">
         {hoveredIcon === name && (
           <motion.div
             variants={tooltipVariants}
@@ -85,7 +85,8 @@ export default function MacOSDock({
   return (
     <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center z-50">
       <motion.div 
-        className="h-16 px-3 rounded-2xl backdrop-blur-xl bg-white/80 border border-gray-200/50 shadow-lg flex items-end gap-2"
+        className="h-16 px-6 rounded-2xl backdrop-blur-xl bg-white/80 border border-[rgba(0,0,0,0.05)] shadow-lg flex items-center gap-4"
+        style={{ borderWidth: '0.5px' }}
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}

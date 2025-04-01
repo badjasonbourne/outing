@@ -47,12 +47,13 @@ export default function ParkGame() {
         title="游戏规则"
       >
         <div className="space-y-3 text-gray-600">
-          <p className="text-sm">1. 将参与者分成若干小组，每组3-5人</p>
-          <p className="text-sm">2. 每组选出一名"描述者"，其他成员作为"猜测者"</p>
-          <p className="text-sm">3. "描述者"根据当前园区主题，描述一个相关事物，<span className="font-medium">不能直接说出该事物的名称</span></p>
-          <p className="text-sm">4. "猜测者"根据描述猜出事物名称</p>
-          <p className="text-sm">5. 主持人可切换园区，各组轮流进行</p>
-          <p className="text-sm">6. 正确猜出事物最多的小组获胜</p>
+          <p className="text-sm">1. 每轮8人参与，进行两轮</p>
+          <p className="text-sm">2. 游戏开始，大家围成一圈，2人一队</p>
+          <p className="text-sm">3. 主持人说"星期天，逛三园"，所有人接"什么园"</p>
+          <p className="text-sm">4. 主持人指定园区（水果园/蔬菜园/动物园）</p>
+          <p className="text-sm">5. 每个小队轮流说出与选定园区相关的事物</p>
+          <p className="text-sm">6. <span className="font-medium">每个人只能说一个字</span>，需小队成员共同完成</p>
+          <p className="text-sm">7. 说错或重复即为淘汰</p>
         </div>
       </RulesModal>
 
