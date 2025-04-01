@@ -58,6 +58,15 @@ export default function MacOSWindow({
     </div>
   );
 
+  // 跟踪窗口的位置
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  // 处理拖动结束事件
+  const handleDragEnd = (event: any, info: any) => {
+    setPosition({ x: info.point.x, y: info.point.y });
+    setIsDragging(false);
+  };
+  
   return (
     <motion.div
       className={`${
@@ -73,6 +82,7 @@ export default function MacOSWindow({
         opacity: 1, 
         scale: 1,
         x: isFullScreen ? 0 : '-50%',
+        y: isFullScreen ? 0 : undefined, // 确保全屏时y坐标为0
         transition: { type: 'spring', stiffness: 300, damping: 25 }
       }}
       exit={{ 
@@ -84,10 +94,15 @@ export default function MacOSWindow({
       dragControls={dragControls}
       dragMomentum={false}
       dragListener={false} // 只允许在标题栏拖动
+      onDragEnd={handleDragEnd}
       style={{
-        // 确保全屏时不会溢出屏幕顶部
+        // 确保全屏时窗口位置被重置
         height: isFullScreen ? '100%' : undefined,
         top: isFullScreen ? '0' : undefined,
+        left: isFullScreen ? '0' : undefined,
+        right: isFullScreen ? '0' : undefined,
+        bottom: isFullScreen ? '0' : undefined,
+        transform: isFullScreen ? 'none' : undefined, // 确保全屏时不应用任何transform
       }}
     >
       {/* 窗口标题栏 */}
@@ -114,4 +129,4 @@ export default function MacOSWindow({
       </div>
     </motion.div>
   );
-} 
+}
